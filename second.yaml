@@ -1,0 +1,19 @@
+---
+- name: Install Nginx on Ubuntu Server
+  hosts: webservers
+  become: true  # Run tasks with sudo
+  tasks:
+    - name: Update apt package index
+      apt:
+        update_cache: yes
+
+    - name: Install nginx
+      apt:
+        name: nginx
+        state: present
+
+    - name: Ensure nginx is running
+      service:
+        name: nginx
+        state: started
+        enabled: true
